@@ -55,3 +55,14 @@ uvicorn main:app --reload
 comments:
 app = the FastAPI instance
 --reload = auto-reload on changes (for dev)
+
+
+TEST
+
+✅ 1. Install the required packages (if not yet installed):
+pip install pytest httpx pytest-asyncio
+
+✅ 2 Run the test:
+pytest test_main.py
+
+
