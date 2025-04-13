@@ -21,14 +21,29 @@ company_domains = {
 }
 
 @app.get("/stocks/{ticker}")
+
 async def get_stock(ticker: str):
     stock = yf.Ticker(ticker)
     data = stock.info
-    # print('data', data)
-    # print(data.get("shortName"))
         # Default to Clearbit logo if domain is known
     domain = company_domains.get(ticker.upper())
+    
     logo_url = f"https://logo.clearbit.com/{domain}" if domain else None
+    
+    # Get historical prices
+    hist = stock.history(period="5d", interval="1d")
+   
+    history = [
+        {
+            "time": date.strftime("%Y-%m-%d"),
+            "open": round(row["Open"], 2),
+            "high": round(row["High"], 2),
+            "low": round(row["Low"], 2),
+            "close": round(row["Close"], 2),
+            "volume": int(row["Volume"]),
+        }
+        for date, row in hist.iterrows()
+    ]  
     
     return {
         "ticker": ticker,
@@ -36,7 +51,8 @@ async def get_stock(ticker: str):
         "price": data.get("currentPrice"),
         "change": data.get("regularMarketChangePercent"),
         "volume": data.get("volume"),
-        "logo": logo_url
+        "logo": logo_url,
+        "history": history
     }
 
 # Expected return format JSON:
