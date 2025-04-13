@@ -18,6 +18,9 @@ company_domains = {
     "MSFT": "microsoft.com",
     "AMZN": "amazon.com",
     "META": "meta.com",
+    "V": "visa.com",
+    "NVDA": "nvidia.com",
+    "XOM": "corporate.exxonmobil.com"
 }
 
 @app.get("/stocks/{ticker}")
