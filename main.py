@@ -35,7 +35,7 @@ async def get_stock(ticker: str):
    
     history = [
         {
-            "time": date.strftime("%Y-%m-%d"),
+            "time": date.strftime("%Y-%m-%d"), # frontend (light-weight) expects time (not date)
             "open": round(row["Open"], 2),
             "high": round(row["High"], 2),
             "low": round(row["Low"], 2),
@@ -61,7 +61,8 @@ async def get_stock(ticker: str):
 # shortName: "Google Inc",
 # price: 159.68,
 # change: 8.940507,
-# volume: 32479473
+# volume: 32479473,
+# history: [{},{}],
 # }
 
 # https://yfinance-python.org
