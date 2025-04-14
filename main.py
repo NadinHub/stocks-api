@@ -34,7 +34,7 @@ async def get_stock(ticker: str):
     logo_url = f"https://logo.clearbit.com/{domain}" if domain else None
     
     # Get historical prices
-    hist = stock.history(period="5d", interval="1d")
+    hist = stock.history(period="30d", interval="1d")
    
     history = [
         {
